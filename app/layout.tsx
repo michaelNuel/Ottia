@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 // import localFont from "next/font/local";
 import { Inter } from 'next/font/google'
 import "./globals.css";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -33,6 +34,33 @@ export default function RootLayout({
         className={inter.className}
       >
         {children}
+
+        <Script
+          id="smartsupp-script"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              var _smartsupp = _smartsupp || {};
+              _smartsupp.key = 'f31dd06691f20b1261f18280ee377a9fd78d45be';
+              window.smartsupp||(function(d) {
+                var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+                s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+                c.type='text/javascript';c.charset='utf-8';c.async=true;
+                c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+              })(document);
+            `,
+          }}
+        />
+        <noscript>
+          Powered by{" "}
+          <a
+            href="https://www.smartsupp.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Smartsupp
+          </a>
+        </noscript>
       </body>
     </html>
   );
